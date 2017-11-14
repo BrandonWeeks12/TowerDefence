@@ -1,0 +1,171 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package finalproject;
+
+import java.nio.FloatBuffer;
+import org.lwjgl.BufferUtils;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
+
+/**
+ *
+ * @author Brandon
+ */
+public class Enemy {
+    
+    private float movementSpeed;
+    
+    private int health, texId, vertId, drawCount;
+    
+    private int middlePointX, middlePointY;
+    
+    //For location
+    private int NORTH=0, EAST=1, SOUTH=2, WEST=3, currentDirection;
+    
+    private float[] verts, texCoords;
+    
+    private Texture enemyTex;
+    
+    private boolean continueMoving;
+    
+    public Enemy(int totalHealth, float speed, float[] startingPosition, float[] texCoordinates, int startingDirection){
+        
+        movementSpeed = speed;
+        health = totalHealth;
+        
+        this.currentDirection = startingDirection;
+        
+        drawCount = startingPosition.length;
+        
+        verts = startingPosition;
+        texCoords = texCoordinates;
+        
+        //Center Point X
+        middlePointX = (int)(verts[0]+verts[4])/2;
+        
+        //Center Point Y
+        middlePointY = (int)(verts[1]+verts[5])/2;
+        
+        enemyTex = new Texture("./assets/Enemy.png");
+        
+        updateVertBuffer(verts);
+        updateTexCoordsBuffer(texCoords);
+        
+        continueMoving = true;
+    }
+    
+    private void updateEnemyMovement(){
+        if(continueMoving){
+           updateYVerts(movementSpeed); 
+        }
+        
+    }
+    
+    public void render(){
+        enemyTex.bind();
+        
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, vertId);
+        glVertexPointer(2, GL_FLOAT, 0, 0);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, texId);
+        glTexCoordPointer(2, GL_FLOAT, 0, 0);
+        
+        glDrawArrays(GL_QUADS, 0, drawCount);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        
+        updateEnemyMovement();
+        
+    }
+    
+    private FloatBuffer createBuffer(float[] data){
+        FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
+        buffer.put(data);
+        buffer.flip();
+        return buffer;
+    }
+    
+     //Needs this to update texCoords for image
+     private void updateTexCoordsBuffer(float[] texCoords){
+        texId = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, texId);
+        glBufferData(GL_ARRAY_BUFFER, createBuffer(texCoords), GL_STATIC_DRAW);
+    }
+    
+    //Needs this to update verticies for image
+    private void updateVertBuffer(float[] verts){
+        vertId = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, vertId);
+        glBufferData(GL_ARRAY_BUFFER, createBuffer(verts), GL_STATIC_DRAW);
+    }
+    
+    private void updateYVerts(float y){
+        verts[1] = verts[1] + y;
+        
+        //Top left
+        verts[3] = verts[3] + y;
+        
+        //Bottom right
+        verts[5] = verts[5] + y;
+        
+        //Top right
+        verts[7] = verts[7] + y;
+        
+        setVerts(verts);
+        
+        //Center Point Y
+        middlePointY = (int)(verts[1]+verts[5])/2;
+        System.out.println("middlePointY - Enemy: " + middlePointY);
+    }
+    
+    private void updateXVerts(int x){
+        //Bottom left
+        verts[0] = verts[0] + x;
+        
+        //Top left
+        verts[2] = verts[2] + x;
+        
+        //Bottom right
+        verts[4] = verts[4] + x;
+        
+        //Top right
+        verts[6] = verts[6] + x;
+        
+        setVerts(verts);
+        //Center Point X
+        middlePointX = (int)(verts[0]+verts[4])/2;
+        System.out.println("middlePointX - Enemy: " + middlePointX);
+    }
+    
+    
+    public void setVerts(float[] verts){
+        updateVertBuffer(verts);
+    }
+    public void setTexCoords(float[] texCoords){
+        updateTexCoordsBuffer(texCoords);
+    }
+    
+    public boolean shouldContinueMoving(){
+        return continueMoving;
+    }
+    
+    public void setContinueMoving(boolean move){
+        continueMoving = move;
+    }
+    
+    public int getMiddlePointX(){
+        return middlePointX;
+    }
+    
+    public int getMiddlePointY(){
+        return middlePointY;
+    }
+}
