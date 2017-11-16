@@ -31,7 +31,7 @@ public class PlayState {
     public PlayState(int mapSelected){
         map = new Maps(mapSelected);
         enemies = new ArrayList<Enemy>();
-        numEnemies = 4;
+        numEnemies = 1;
         timeBetween = 60;
         /*
         enemy = new Enemy(5, 1f, new float[]{83, 16, 
@@ -106,7 +106,6 @@ public class PlayState {
     private boolean checkEnemyPosition(Enemy enemy){
         int rowNum = getGameBoard().getRowNum(enemy.getMiddlePointY());
         int colNum = getGameBoard().getColNum(enemy.getMiddlePointX());
-        //System.out.println(colNum+ " "+rowNum);
         if (rowNum < getGameBoard().getRows() && colNum < getGameBoard().getCols()){
         Tile tile = getGameBoard().getTile(colNum,rowNum);
         if (enemy.getMiddlePointX()==tile.getMiddlePointX() && enemy.getMiddlePointY()==tile.getMiddlePointY()){

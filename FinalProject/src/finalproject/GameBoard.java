@@ -34,8 +34,8 @@ public class GameBoard {
         this.rows = rows;
         this.cols = cols;
         
-        this.width = cols*25;
-        this.height = rows*25;
+        this.width = cols*26;
+        this.height = rows*26;
         
         minX = 26;
         minY = 26;
@@ -147,7 +147,6 @@ public class GameBoard {
     
     //Returns the tile based on the x and y pixel value
     public Tile getTile(int colNum, int rowNum){
-        //System.out.println(rowNum+ " "+colNum);
         return tiles[rowNum][colNum];
     }
     
@@ -167,7 +166,6 @@ public class GameBoard {
     
     //Returns true if tile is path
     public boolean checkTile(int x,int y){
-        //System.out.println("x: "+x+" y: "+y+" "+(tiles[y][x].getTileType() == 1));
         return tiles[y][x].getTileType() == 1;
     }
 
