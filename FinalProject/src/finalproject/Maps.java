@@ -18,7 +18,8 @@ public class Maps {
     
     private int GRASS = 0, PATH = 1;
     
-    
+    private float startingLocX,startingLocY;
+            private int startDir;
     
     public Maps(int mapSelection){
         switch(mapSelection){
@@ -76,6 +77,9 @@ public class Maps {
         
         
         gameBoard = new GameBoard(15, 15, map);
+        startingLocX = gameBoard.getTile(2,0).getMiddlePointX();
+        startingLocY = gameBoard.getTile(2,0).getMiddlePointY();
+        startDir = 2;
     }
     
     private void mapTwo(){
@@ -103,6 +107,9 @@ public class Maps {
         };      
         
         gameBoard = new GameBoard(20, 20, map);
+        startingLocX = gameBoard.getTile(0,2).getMiddlePointX();
+        startingLocY = gameBoard.getTile(0,2).getMiddlePointY();
+        startDir = 1;
     }
     
     private void mapThree(){
@@ -130,10 +137,25 @@ public class Maps {
         }; 
         
         gameBoard = new GameBoard(20, 20, map);
+        startingLocX = gameBoard.getTile(0,10).getMiddlePointX();
+        startingLocY = gameBoard.getTile(0,10).getMiddlePointY();
+        startDir=1;
+    }
+
+    public float getStartingLocX() {
+        return startingLocX;
+    }
+
+    public float getStartingLocY() {
+        return startingLocY;
     }
     
     public GameBoard getGameBoard(){
         return gameBoard;
+    }
+
+    public int getStartDir() {
+        return startDir;
     }
     
     

@@ -27,7 +27,7 @@ public class GameBoard {
     
     private Texture highLightTex, grassTex, pathTex;
     
-    
+   
     
     public GameBoard(int rows, int cols, int[][] mapLayout){
         
@@ -63,7 +63,6 @@ public class GameBoard {
         
         
         createGameBoard(mapLayout);
-        
         
     }
     
@@ -171,4 +170,24 @@ public class GameBoard {
         //System.out.println("x: "+x+" y: "+y+" "+(tiles[y][x].getTileType() == 1));
         return tiles[y][x].getTileType() == 1;
     }
+
+    public int getMinX() {
+        return minX;
+    }
+
+    public int getMinY() {
+        return minY;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    
+    
+    
 }

@@ -28,18 +28,28 @@ public class Enemy {
     
     private float[] verts, texCoords;
     
+    private float radius= 15f/2f; 
+    
     private Texture enemyTex;
     
-    public Enemy(int totalHealth, float speed, float[] startingPosition, float[] texCoordinates, int startingDirection){
+    public Enemy(int totalHealth, float speed, float startingLocX,float startingLocY, float[] texCoordinates, int startingDirection){
         
         movementSpeed = speed;
         health = totalHealth;
         
         this.currentDirection = startingDirection;
         
-        drawCount = startingPosition.length;
+        verts = new float[]{
+            startingLocX - radius,startingLocY - radius,
+            startingLocX -radius,startingLocY +radius,
+            startingLocX + radius,startingLocY +radius,
+            startingLocX + radius, startingLocY - radius
+        };
         
-        verts = startingPosition;
+        
+        drawCount = verts.length;
+        
+        
         texCoords = texCoordinates;
         
         //Center Point X
@@ -56,6 +66,11 @@ public class Enemy {
         curRowNum =-1;
         curColNum =-1;
     }
+    
+    private void setCircleVerts(){
+        
+    }
+    
     
     private void updateEnemyMovement(){
         switch(currentDirection){
@@ -138,10 +153,10 @@ public class Enemy {
     }
     
     private void updateXVerts(float x){
-        //Bottom left
+        //Top left
         verts[0] = verts[0] + x;
         
-        //Top left
+        //Bottom left
         verts[2] = verts[2] + x;
         
         //Bottom right

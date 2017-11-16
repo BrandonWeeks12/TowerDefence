@@ -43,10 +43,7 @@ public class PlayState {
     
     
     private void createEnemy(){
-        enemies.add(new Enemy(5, 1f, new float[]{83, 16, 
-                                                83, 31, 
-                                                98, 31, 
-                                                98, 16}, new float[]{0, 0, 0, 1, 1, 1, 1, 0}, 2));
+        enemies.add(new Enemy(5, 1f, map.getStartingLocX(),map.getStartingLocY(), new float[]{0, 0, 0, 1, 1, 1, 1, 0}, map.getStartDir()));
         
     }
     public void startWave(){
@@ -78,9 +75,15 @@ public class PlayState {
         if (!wave && frameCount> TIME_BETWEEN_ROUNDS)
             startWave();
         
-        renderEnemies();  
+        renderEnemies(); 
+        renderText();
     }
-    
+    private void renderText(){
+        //System.out.println("Rendering Text");
+        float y = getGameBoard().getHeight() + getGameBoard().getMinY() + 25;
+        Text.renderString("Lives: "+lives, 50, y);
+        Text.renderString("Score: ", 250, y);
+    }
     private void renderEnemies(){
         ArrayList<Enemy> toRemove = new ArrayList<Enemy>();
         for (Enemy enemy:enemies){
