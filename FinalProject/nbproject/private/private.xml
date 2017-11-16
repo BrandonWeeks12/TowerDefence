@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/GameBoard.java</file>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/Maps.java</file>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/InputHandler.java</file>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/FinalProject.java</file>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/PlayState.java</file>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/Tile.java</file>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/Enemy.java</file>
-            <file>file://FILESRV/stufiles$/brandon.weeks/NetBeansProjects/FinalProject/src/finalproject/MainMenuState.java</file>
+            <file>file:/C:/Users/zamsl/Documents/GitHub/TowerDefence/FinalProject/src/finalproject/PlayState.java</file>
+            <file>file:/C:/Users/zamsl/Documents/GitHub/TowerDefence/FinalProject/src/finalproject/Texture.java</file>
+            <file>file:/C:/Users/zamsl/Documents/GitHub/TowerDefence/FinalProject/src/finalproject/Enemy.java</file>
         </group>
     </open-files>
 </project-private>

@@ -22,14 +22,13 @@ public class Enemy {
     
     private int middlePointX, middlePointY;
     
+    private int curRowNum,curColNum;
     //For location
     private int NORTH=0, EAST=1, SOUTH=2, WEST=3, currentDirection;
     
     private float[] verts, texCoords;
     
     private Texture enemyTex;
-    
-    private boolean continueMoving;
     
     public Enemy(int totalHealth, float speed, float[] startingPosition, float[] texCoordinates, int startingDirection){
         
@@ -54,19 +53,31 @@ public class Enemy {
         updateVertBuffer(verts);
         updateTexCoordsBuffer(texCoords);
         
-        continueMoving = true;
+        curRowNum =-1;
+        curColNum =-1;
     }
     
     private void updateEnemyMovement(){
-        if(continueMoving){
-           updateYVerts(movementSpeed); 
+        switch(currentDirection){
+            case 0:
+                updateYVerts(-movementSpeed);
+                break;
+            case 1:
+                updateXVerts(movementSpeed);
+                break;
+            case 2:
+                updateYVerts(movementSpeed);
+                break;
+            case 3:
+                updateXVerts(-movementSpeed);
+                break;
         }
         
     }
     
     public void render(){
         enemyTex.bind();
-        
+
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         
@@ -122,11 +133,11 @@ public class Enemy {
         setVerts(verts);
         
         //Center Point Y
-        middlePointY = (int)(verts[1]+verts[5])/2;
-        System.out.println("middlePointY - Enemy: " + middlePointY);
+        middlePointY = (int)(verts[1]+verts[3])/2;
+        //System.out.println("middlePointY - Enemy: " + middlePointY);
     }
     
-    private void updateXVerts(int x){
+    private void updateXVerts(float x){
         //Bottom left
         verts[0] = verts[0] + x;
         
@@ -142,7 +153,7 @@ public class Enemy {
         setVerts(verts);
         //Center Point X
         middlePointX = (int)(verts[0]+verts[4])/2;
-        System.out.println("middlePointX - Enemy: " + middlePointX);
+        //System.out.println("middlePointX - Enemy: " + middlePointX);
     }
     
     
@@ -153,14 +164,6 @@ public class Enemy {
         updateTexCoordsBuffer(texCoords);
     }
     
-    public boolean shouldContinueMoving(){
-        return continueMoving;
-    }
-    
-    public void setContinueMoving(boolean move){
-        continueMoving = move;
-    }
-    
     public int getMiddlePointX(){
         return middlePointX;
     }
@@ -168,4 +171,39 @@ public class Enemy {
     public int getMiddlePointY(){
         return middlePointY;
     }
+    
+    public int getCurrentDirection(){
+        return currentDirection;
+    }
+    
+    public void setCurrentDirection(int x){
+        currentDirection = x;
+    }
+    
+    public int getHealth(){
+        return health;
+    }
+    
+    public void setHealth(int newHealth){
+        health = newHealth;
+    }
+    
+    public int getCurColNum(){
+        return curColNum;
+    }
+
+    public int getCurRowNum() {
+        return curRowNum;
+    }
+
+    public void setCurRowNum(int curRowNum) {
+        this.curRowNum = curRowNum;
+    }
+
+    public void setCurColNum(int curColNum) {
+        this.curColNum = curColNum;
+    }
+    
+    
+    
 }

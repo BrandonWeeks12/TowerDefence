@@ -68,10 +68,10 @@ public class Tile {
         maxY = (int)vertices[5];
         
         middlePointX = (minX+maxX)/2;
-        System.out.println("middlePointX: " + middlePointX);
+        //System.out.println("middlePointX: " + middlePointX);
         
         middlePointY = (minY + maxY)/2;
-        System.out.println("middlePointY: " + middlePointY);
+        //System.out.println("middlePointY: " + middlePointY);
         
     }
     
@@ -138,6 +138,4 @@ public class Tile {
     public int getMiddlePointY(){
         return middlePointY;
     }
-    
-    
 }

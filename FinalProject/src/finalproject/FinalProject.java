@@ -28,7 +28,7 @@ public class FinalProject {
     private static InputHandler inputHandler;
     private static SelectMapState mapSelection;
     private static PlayState playState;
-    
+    public static long win;
     public static void main(String[] args) {
         
         //Returns 1 if successfull, 0 if not.
@@ -37,7 +37,7 @@ public class FinalProject {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         
         //Creates window
-        long win = glfwCreateWindow(700, 700, "Title", 0, 0);
+        win = glfwCreateWindow(700, 700, "Title", 0, 0);
         
         GLFWVidMode videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
                 
@@ -65,14 +65,37 @@ public class FinalProject {
         inputHandler = new InputHandler(win, mainMenuState, mapSelection, playState);
         
         
-       //PlayState playState = new PlayState(win);
-       
+        //PlayState playState = new PlayState(win);
+        double frameCap = 1.0/60.0;        
+        double unprocessed = 0;
+        double frameTime = 0;
+        int frames =0;
+        double time = (double)System.nanoTime() / (double)1000000000L;
         //Keeps window open(updates)
         while(!glfwWindowShouldClose(win)){
-            glfwPollEvents();
-            glClear(GL_COLOR_BUFFER_BIT);
+            boolean canRender = false;
+            double startTime = (double)System.nanoTime() / (double)1000000000L;
+            double passed = startTime - time;
+            unprocessed += passed;
+            time = startTime;         
+            frameTime += passed; 
             
             
+            
+            while (unprocessed >= frameCap) {
+                glfwPollEvents();
+                glClear(GL_COLOR_BUFFER_BIT);
+                inputHandler.updateMouseClicks();
+                canRender = true;
+                unprocessed -= frameCap;
+                if (frameTime>=1){
+                    //System.out.println(frames);
+                    frames=0;
+                    frameTime=0;
+                }
+            }
+            
+            if (canRender){
             switch(currentState){
                 case MAINMENU:
                     mainMenuState.renderMainMenu();
@@ -87,10 +110,10 @@ public class FinalProject {
                     break;
             }
             
-            inputHandler.updateMouseClicks();
+            
             glfwSwapBuffers(win);
-            
-            
+            frames++;
+            }
             
             //To close window
             if(glfwGetKey(win, GLFW_KEY_ESCAPE) == GL_TRUE){
