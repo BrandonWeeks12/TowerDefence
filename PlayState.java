@@ -251,7 +251,7 @@ public class PlayState {
         }
     }
     
-    public void destroyEnemy(Enemy enemy){
+    private void destroyEnemy(Enemy enemy){
         for(int i=0; i<enemies.size(); i++){
             if(enemies.get(i).equals(enemy)){
                 enemy.setVisible(false);
