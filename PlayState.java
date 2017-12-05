@@ -74,7 +74,7 @@ public class PlayState {
         enemies.add(new Enemy(100, 1f, map.getStartingLocX(),map.getStartingLocY(), new float[]{0, 0, 0, 1, 1, 1, 1, 0}, map.getStartDir()));
         
     }
-    public void startWave(){
+    private void startWave(){
         frameCount =0;
         createdEnemies = 0;
         numEnemies++;
