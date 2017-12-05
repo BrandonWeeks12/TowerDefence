@@ -19,7 +19,7 @@ public class FinalProject {
     
 
     public static enum State {
-        MAINMENU, SELECTMAP, PLAYSTATE
+        MAINMENU, SELECTMAP, PLAYSTATE,HIGHSCORE
     }
     
     public static State currentState;
@@ -27,6 +27,7 @@ public class FinalProject {
     private static MainMenuState mainMenuState;
     private static InputHandler inputHandler;
     private static SelectMapState mapSelection;
+    private static HighScoreState highScoreState = new HighScoreState();
     private static PlayState playState;
     public static long win;
     public static void main(String[] args) {
@@ -107,6 +108,9 @@ public class FinalProject {
                 case PLAYSTATE:
                     playState.render();
                     break;
+                case HIGHSCORE:
+                    highScoreState.render();
+                    break;
                 default:
                     break;
             }
@@ -118,6 +122,8 @@ public class FinalProject {
             
             //To close window
             if(glfwGetKey(win, GLFW_KEY_ESCAPE) == GL_TRUE){
+                if (currentState==State.HIGHSCORE && HighScoreState.curStatus == HighScoreState.status.addScore)
+                    HighScoreState.addScore();
                 glfwDestroyWindow(win);
                 break;
             }
@@ -131,6 +137,8 @@ public class FinalProject {
     
     public static void setState(State state){
         currentState = state;
+        if (state.equals(State.HIGHSCORE))
+            HighScoreState.loadFile();
     }
     
     public State getCurrentState(){

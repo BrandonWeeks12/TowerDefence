@@ -34,6 +34,8 @@ public class Enemy {
     
     private Texture enemyTex;
     
+    private HealthBar healthBar;
+    
     public Enemy(int totalHealth, float speed, float startingLocX,float startingLocY, float[] texCoordinates, int startingDirection){
         visible = true;
         movementSpeed = speed;
@@ -67,6 +69,8 @@ public class Enemy {
         
         curRowNum =-1;
         curColNum =-1;
+        
+        healthBar = new HealthBar(startingLocX,startingLocY,totalHealth);
     }
     
     
@@ -108,6 +112,7 @@ public class Enemy {
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         
         updateEnemyMovement();
+        healthBar.render(health);
         
     }
     
@@ -145,7 +150,7 @@ public class Enemy {
         verts[7] = verts[7] + y;
         
         setVerts(verts);
-        
+        healthBar.moveY(y);
         //Center Point Y
         middlePointY = (int)(verts[1]+verts[3])/2;
         //System.out.println("middlePointY - Enemy: " + middlePointY);
@@ -165,6 +170,7 @@ public class Enemy {
         verts[6] = verts[6] + x;
         
         setVerts(verts);
+        healthBar.moveX(x);
         //Center Point X
         middlePointX = (int)(verts[0]+verts[4])/2;
         //System.out.println("middlePointX - Enemy: " + middlePointX);

@@ -49,6 +49,8 @@ public class PlayState {
     
     private int currency;
     
+    private static int score = 1000;
+    
     private ArrayList<Tower> towerList;
     
     public PlayState(int mapSelected){
@@ -87,7 +89,8 @@ public class PlayState {
         frameCount++;
         
         if (lives == 0){
-            glfwSetWindowShouldClose(FinalProject.win,true);
+            //glfwSetWindowShouldClose(FinalProject.win,true);
+            FinalProject.setState(FinalProject.State.HIGHSCORE);
         }
         map.getGameBoard().renderTiles();
         
@@ -104,18 +107,24 @@ public class PlayState {
             startWave();
         
         renderEnemies(); 
-        renderText();
+        
         renderTowerMenu();
         renderTowerBullets();
+        renderText();
+        renderSellUpgradeText();
     }
     private void renderText(){
         //System.out.println("Rendering Text");
         float y = getGameBoard().getHeight() + getGameBoard().getMinY() + 25;
         Text.renderString("Lives: "+lives, 50, y);
-        Text.renderString("Score: ", 250, y);
+        Text.renderString("Score: "+score, 250, y);
         Text.renderString("Currency: " + currency, 450, y);
     }
     
+    private void renderSellUpgradeText(){
+        Text.renderString("Sell", 560, 335);
+        Text.renderString("Upgrade", 560, 380);
+    }
     private boolean enemiesAreInView(int i, Tower tower){
         if(enemies.get(i).getMiddlePointX() < tower.getOriginalCenterX()+tower.getRadiusView() && enemies.get(i).getMiddlePointX() > tower.getOriginalCenterX()-tower.getRadiusView()){
             if(enemies.get(i).getMiddlePointY() < tower.getOriginalCenterY()+tower.getRadiusView() && enemies.get(i).getMiddlePointY() > tower.getOriginalCenterY()-tower.getRadiusView()){
@@ -246,6 +255,8 @@ public class PlayState {
         for(int i=0; i<enemies.size(); i++){
             if(enemies.get(i).equals(enemy)){
                 enemy.setVisible(false);
+                currency += 50;
+                score += 100;
             }
         }
         
@@ -332,5 +343,29 @@ public class PlayState {
         Tower tower = new Tower(centerX, centerY, towerType);
         towerList.add(tower);
     }
+    
+    public void sellTower(int centerX, int centerY){
+        towerList.remove(getSelectedTower(centerX, centerY));
+    }
+    
+    public Tower getSelectedTower(int centerX, int centerY){
+        int towerSelected = 0;
+        for(int i=0; i<towerList.size(); i++){
+            if(towerList.get(i).getCenterX() == centerX && towerList.get(i).getCenterY() == centerY){
+                towerSelected = i;
+            }
+        }
+        return towerList.get(towerSelected);
+    }
+
+    public static int getScore() {
+        return score;
+    }
+
+    public static void setScore(int score) {
+        score = score;
+    }
+    
+    
     
 }
