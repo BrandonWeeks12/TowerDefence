@@ -206,6 +206,12 @@ public class Tower {
         radiusView = 100;
     }
     
+    public void upgradeTower(){
+        damage += 2;
+        radiusView += 10;
+        
+    }
+    
     public int getCenterX(){
         return centerX;
     }
@@ -285,7 +291,6 @@ public class Tower {
             if(viewableEnemies.get(i).isVisible()){
                 targetEnemy = viewableEnemies.get(i);
                 targetSelected = true;
-                System.out.println("target selected = true" + targetEnemy);
                 return;
             }
         }
@@ -325,5 +330,9 @@ public class Tower {
         
         
         
+    }
+    
+    public int getTowerType(){
+        return towerType;
     }
 }

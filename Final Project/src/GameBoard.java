@@ -158,10 +158,6 @@ public class GameBoard {
         return rows;
     }
     
-    public Tile[] getCheckPoints(){
-        return tileCheckPoints;
-    }
-    
     //Returns the tile based on the x and y pixel value
     public Tile getTile(int colNum, int rowNum){
         return tiles[rowNum][colNum];

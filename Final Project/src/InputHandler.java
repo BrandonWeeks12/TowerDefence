@@ -115,7 +115,7 @@ public class InputHandler {
     //Selects/Deselects tile
     private void checkPlayStateClick(double mouseX, double mouseY){
         
-        if(mouseX >= 560 && mouseX <= 600){
+        if(mouseX >= 560 && mouseX <= 600 && playState.getGameBoard().getTouchedTile().getTileType() == 2){
             
             
             if(mouseY >= 50 && mouseY <= 90){
@@ -147,8 +147,54 @@ public class InputHandler {
                     }
                 }
             }
-            playState.setSelected(false);
+        }else if(playState.getGameBoard().getTouchedTile().getTileType() != 0 && playState.getGameBoard().getTouchedTile().getTileType() != 1 && playState.alreadySelectedTile()){
+                
+            if(mouseX >= 560 && mouseX <= 610 && mouseY >= 340 && mouseY <= 360){
+                //Sell Button
+                playState.sellTower(playState.getGameBoard().getTouchedTile().getMiddlePointX(), playState.getGameBoard().getTouchedTile().getMiddlePointY());
+                playState.getGameBoard().getTouchedTile().setTileType(0);
+                playState.setCurrency(playState.getCurrency() + 5);
+            }else if(mouseX >= 560 && mouseX <= 650 && mouseY >= 385 && mouseY <= 405){
+                //Upgrade Button
+                //Switches on towerType 1, 2, or 3
+                switch(playState.getSelectedTower(playState.getGameBoard().getTouchedTile().getMiddlePointX(), playState.getGameBoard().getTouchedTile().getMiddlePointY()).getTowerType()){
+                    case 1:
+                        if(playState.getCurrency() >= 30){
+                            System.out.println("upgrade");
+                            playState.setCurrency(playState.getCurrency() - 30);
+                            playState.getSelectedTower(playState.getGameBoard().getTouchedTile().getMiddlePointX(), playState.getGameBoard().getTouchedTile().getMiddlePointY()).upgradeTower();
+                        }
+                        
+                        break;
+                    case 2:
+                        if(playState.getCurrency() >= 50){
+                            playState.setCurrency(playState.getCurrency() - 50);
+                            playState.getSelectedTower(playState.getGameBoard().getTouchedTile().getMiddlePointX(), playState.getGameBoard().getTouchedTile().getMiddlePointY()).upgradeTower();
+                        }
+                       
+                        break;
+                    case 3:
+                        if(playState.getCurrency() >= 70){
+                            playState.setCurrency(playState.getCurrency() - 70);
+                            playState.getSelectedTower(playState.getGameBoard().getTouchedTile().getMiddlePointX(), playState.getGameBoard().getTouchedTile().getMiddlePointY()).upgradeTower();
+                        }
+                        
+                        break;
+                    default:
+                        break;
+                }
+                
+                    
+            }
+               
         }
+            playState.setSelected(false);
+            
+            
+        
+        
+        
+      
         for(rowCounter=0; rowCounter<playState.getGameBoard().getRows(); rowCounter++){
             for(colCounter=0; colCounter<playState.getGameBoard().getCols(); colCounter++){
                 if((mouseX >= playState.getGameBoard().getTiles()[rowCounter][colCounter].getMinX() && mouseX <= playState.getGameBoard().getTiles()[rowCounter][colCounter].getMaxX()) 
@@ -156,11 +202,10 @@ public class InputHandler {
                     
                     if(playState.getGameBoard().getTiles()[rowCounter][colCounter].getTileType() != 1){
                         
-                        
                         if(playState.alreadySelectedTile()){
                             playState.setSelected(false);
                         }else{
-                            playState.getGameBoard().getTiles()[rowCounter][colCounter].setTileType(2);
+                            playState.getGameBoard().getTiles()[rowCounter][colCounter].setTileType(playState.getGameBoard().getTiles()[rowCounter][colCounter].getTileType());
                             playState.getGameBoard().setTouchedTile(playState.getGameBoard().getTiles()[rowCounter][colCounter]);
                             playState.setSelected(true);
                         }
