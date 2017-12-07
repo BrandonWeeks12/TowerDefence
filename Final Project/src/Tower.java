@@ -64,15 +64,15 @@ public class Tower {
         
         switch(towerType){
             case 1:
-                towerOneBullet = new Texture("./assets/Tower1Bullet.png");
+                towerOneBullet = new Texture("/assets/Tower1Bullet.png");
                 setTowerOneVariables();
                 break;
             case 2:
-                towerTwoBullet = new Texture("./assets/Tower2Bullet.png");
+                towerTwoBullet = new Texture("/assets/Tower2Bullet.png");
                 setTowerTwoVariables();
                 break;
             case 3:
-                towerThreeBullet = new Texture("./assets/Tower3Bullet.png");
+                towerThreeBullet = new Texture("/assets/Tower3Bullet.png");
                 setTowerThreeVariables();
                 break;
             default:

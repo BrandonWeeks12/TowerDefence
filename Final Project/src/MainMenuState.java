@@ -25,7 +25,7 @@ public class MainMenuState {
     public int exitMinX=270, exitMaxX=430, exitMinY=430, exitMaxY=480;
     
     public MainMenuState(float[] vertices, float[] texCoordinates){
-        mainMenuTex = new Texture("./assets/MainMenu.png");
+        mainMenuTex = new Texture("/assets/MainMenu.png");
         
         drawCount = vertices.length;
         

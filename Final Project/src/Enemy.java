@@ -62,7 +62,7 @@ public class Enemy {
         //Center Point Y
         middlePointY = (int)(verts[1]+verts[5])/2;
         
-        enemyTex = new Texture("./assets/Enemy.png");
+        enemyTex = new Texture("/assets/Enemy.png");
         
         updateVertBuffer(verts);
         updateTexCoordsBuffer(texCoords);

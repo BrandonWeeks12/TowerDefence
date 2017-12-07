@@ -55,17 +55,17 @@ public class GameBoard {
         //Texture coords for quads
         texCoords = new float[] {0, 0, 0, 1, 1, 1, 1, 0};
         
-        grassTex = new Texture("./assets/Square.png");
+        grassTex = new Texture("/assets/Square.png");
         
-        highLightTex = new Texture("./assets/HighLightedSquare.png");
+        highLightTex = new Texture("/assets/HighLightedSquare.png");
         
-        pathTex = new Texture("./assets/Path.png");
+        pathTex = new Texture("/assets/Path.png");
         
-        towerOneTex = new Texture("./assets/Tower1.png");
+        towerOneTex = new Texture("/assets/Tower1.png");
         
-        towerTwoTex = new Texture("./assets/Tower2.png");
+        towerTwoTex = new Texture("/assets/Tower2.png");
         
-        towerThreeTex = new Texture("./assets/Tower3.png");
+        towerThreeTex = new Texture("/assets/Tower3.png");
         
         
         createGameBoard(mapLayout);

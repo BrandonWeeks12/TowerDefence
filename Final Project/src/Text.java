@@ -27,7 +27,7 @@ import static org.lwjgl.opengl.GL15.glGenBuffers;
  * @author zamsl
  */
 public class Text {
-    private static Texture tex = new Texture("./assets/font.png");
+    private static Texture tex = new Texture("/assets/font.png");
     public Text(){
         
     }

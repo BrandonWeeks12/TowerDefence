@@ -61,7 +61,7 @@ public class PlayState {
         currency = 500;
         towerList = new ArrayList();
         
-        towerMenuTex = new Texture("./assets/TowerMenu.png");
+        towerMenuTex = new Texture("/assets/TowerMenu.png");
         initiateTowerMenu(new float[]{0, 0, 0, 1, 1, 1, 1, 0}, new float[]{560, 26, 
                                                                            560, 500, 
                                                                            685, 500, 

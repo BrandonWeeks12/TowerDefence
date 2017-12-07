@@ -8,6 +8,7 @@ package finalproject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 import org.lwjgl.BufferUtils;
@@ -26,12 +27,12 @@ public class Texture {
     
     private int pixel;
     
-   
+    
     public Texture(String fileName){
         BufferedImage bi;
         
         try{
-            bi = ImageIO.read(new File(fileName));
+            bi = ImageIO.read(Texture.class.getResourceAsStream(fileName));
             width = bi.getWidth();
             height = bi.getHeight();
             

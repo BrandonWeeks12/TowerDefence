@@ -27,7 +27,7 @@ public class SelectMapState {
     public int threeMinX=190, threeMaxX=510, threeMinY=455, threeMaxY=510;
     
     public SelectMapState(float[] vertices, float[] texCoordinates){
-        mapSelectTex = new Texture("./assets/MapSelectionMenu.png");
+        mapSelectTex = new Texture("/assets/MapSelectionMenu.png");
         
         drawCount = vertices.length;
         
